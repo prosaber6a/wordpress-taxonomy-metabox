@@ -42,7 +42,8 @@ EOD;
 }
 
 add_action( 'category_add_form_fields', 'tagsm_meta_field_form' );
-add_action( 'add_tag_form_fields', 'tagsm_meta_field_form' );
+add_action( 'post_tag_add_form_fields', 'tagsm_meta_field_form' );
+add_action( 'genres_add_form_fields', 'tagsm_meta_field_form' );
 
 function tagsm_meta_field_edit_form( $term ) {
 	$extra_info = esc_attr( get_term_meta( $term->term_id, 'tagsm_extra_info', true ) );
@@ -64,6 +65,7 @@ EOD;
 
 add_action( 'category_edit_form_fields', 'tagsm_meta_field_edit_form' );
 add_action( 'post_tag_edit_form_fields', 'tagsm_meta_field_edit_form' );
+add_action( 'genres_edit_form_fields', 'tagsm_meta_field_edit_form' );
 
 function tagsm_save_category_meta( $term_id ) {
 	if ( wp_verify_nonce( $_POST['_wpnonce_add-tag'], 'add-tag' ) ) {
@@ -74,6 +76,7 @@ function tagsm_save_category_meta( $term_id ) {
 
 add_action( 'create_category', 'tagsm_save_category_meta' );
 add_action( 'create_post_tag', 'tagsm_save_category_meta' );
+add_action( 'create_genres', 'tagsm_save_category_meta' );
 
 function tagsm_update_category_meta( $term_id ) {
 	if ( wp_verify_nonce( $_POST['_wpnonce'], 'update-tag_' . $term_id ) ) {
@@ -84,5 +87,6 @@ function tagsm_update_category_meta( $term_id ) {
 
 add_action( 'edit_category', 'tagsm_update_category_meta' );
 add_action( 'edit_post_tag', 'tagsm_update_category_meta' );
+add_action( 'edit_genres', 'tagsm_update_category_meta' );
 
 
